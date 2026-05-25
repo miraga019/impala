@@ -146,6 +146,43 @@ footer{background:var(--white);border-top:1px solid var(--gray-light)}
 
 /* ── IMG PLACEHOLDER UTIL ── */
 .img-ph{background:var(--gray-light);display:flex;align-items:center;justify-content:center;color:var(--gray-mid);font-size:11px;text-transform:uppercase;letter-spacing:1px;text-align:center;padding:8px}
+@media (max-width: 768px) {
+  .nav-inner{height:70px;padding:0 20px}
+  .nav-links{display:none}
+  .nav-logo img{height:50px}
+
+  .hero{min-height:400px}
+  .hero-content{padding:40px 20px}
+  .hero-title{font-size:42px}
+
+  .section{padding:50px 20px}
+
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+
+  .pillars-grid{grid-template-columns:1fr;gap:16px}
+
+  .reviews-grid{grid-template-columns:1fr;gap:20px}
+
+  .blog-grid{grid-template-columns:1fr;gap:20px}
+  .blog-header{flex-direction:column;gap:16px;padding:40px 20px 0}
+
+  .award-inner{grid-template-columns:1fr;gap:40px}
+
+  .footer-main{grid-template-columns:1fr 1fr;gap:30px;padding:40px 20px 20px}
+  .footer-bottom{flex-direction:column;align-items:flex-start;padding:20px}
+  .footer-newsletter{flex-direction:column;align-items:flex-start;padding:20px}
+  .newsletter-form{width:100%}
+  .newsletter-form input{min-width:unset;width:100%}
+
+  .mission-inner{padding:50px 20px}
+  .faq-section{padding:50px 20px}
+}
+
+@media (max-width: 480px) {
+  .products-grid{grid-template-columns:1fr}
+  .footer-main{grid-template-columns:1fr}
+  .hero-title{font-size:34px}
+}
 </style>
 </head>
 <body>
