@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impala — Meticulously Mastered</title>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --off-white:#f7f5f2;
+  --gray-light:#e8e5e0;
+  --gray-mid:#9a9590;
+  --gray-dark:#3a3835;
+  --gold:#A3996F;
+  --font-display:'Geologica',sans-serif;
+  --font-body:'Geologica',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--black);background:var(--white);font-size:16px;line-height:1.7}
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce-bar{background:#A3996F;color:var(--white);text-align:center;padding:10px 20px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:400}
+
+/* ── NAV ── */
+nav{background:var(--white);border-bottom:1px solid var(--gray-light);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 40px;height:100px;display:flex;align-items:center;justify-content:space-between}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:var(--black);font-weight:500;position:relative;padding-bottom:4px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:#A3996F;transition:width .3s ease}
+.nav-links a:hover{color:#A3996F}
+.nav-links a:hover::after{width:100%}
+.nav-logo{position:absolute;left:50%;transform:translateX(-50%)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-right button{background:none;border:none;cursor:pointer;font-family:var(--font-body);font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--black)}
+.lang-select{font-size:13px;border:none;outline:none;cursor:pointer;font-family:var(--font-body);color:var(--black);background:transparent}
+
+/* ── HERO ── */
+.hero{position:relative;background:var(--black);color:var(--white);min-height:600px;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55}
+.hero-content{position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto;padding:80px 40px}
+.hero-title{font-family:var(--font-display);font-size:clamp(52px,7vw,92px);font-weight:300;line-height:1.05;margin-bottom:32px;letter-spacing:-1px}
+.hero-title em{font-style:italic;font-weight:300}
+.btn-primary{display:inline-block;background:var(--white);color:var(--black);padding:16px 40px;font-size:13px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:500;transition:background .2s,color .2s}
+.btn-primary:hover{background:var(--gold);color:var(--white)}
+
+/* ── SECTION WRAPPER ── */
+.section{max-width:1280px;margin:0 auto;padding:80px 40px}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gray-mid);margin-bottom:14px;font-weight:400}
+
+/* ── PRODUCTS GRID ── */
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.product-card{cursor:pointer}
+.product-img-wrap{position:relative;background:var(--off-white);aspect-ratio:3/4;overflow:hidden;margin-bottom:16px}
+.product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.product-card:hover .product-img-wrap img{transform:scale(1.04)}
+.badge-award{position:absolute;top:12px;left:12px;background:var(--black);color:var(--white);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;font-weight:500}
+.product-tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray-mid);margin-bottom:6px;font-weight:400}
+.product-name{font-family:var(--font-display);font-size:19px;font-weight:400;margin-bottom:6px}
+.stars{color:var(--gold);font-size:13px;margin-bottom:8px}
+.product-price{font-size:15px;font-weight:600;letter-spacing:0.5px}
+.add-btn{position:absolute;bottom:12px;right:12px;width:40px;height:40px;border-radius:50%;background:var(--black);color:var(--white);border:none;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.add-btn:hover{background:var(--gold)}
+
+/* ── PILLARS ── */
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.pillar-card{padding:36px 28px;background:var(--off-white);border-top:3px solid var(--black);transition:transform .3s ease,box-shadow .3s ease,border-top-color .3s ease}
+.pillar-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,0.1);border-top-color:#A3996F}
+.pillar-num{width:48px;height:48px;border-radius:50%;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:20px;font-weight:500;margin-bottom:20px}
+.pillar-title{font-family:var(--font-display);font-size:20px;font-weight:500;margin-bottom:14px;line-height:1.3}
+.pillar-body{font-size:14px;color:var(--gray-dark);line-height:1.75}
+.pillar-card.dark{background:var(--black);color:var(--white);border-top:3px solid var(--gold)}
+.pillar-card.dark:hover{box-shadow:0 20px 40px rgba(163,153,111,0.3)}
+.pillar-card.dark .pillar-num{background:var(--gold);color:var(--black)}
+.pillar-card.dark .pillar-body{color:var(--gray-light)}
+
+/* ── MISSION / REVIEWS ── */
+.mission-section{background:var(--white)}
+.mission-inner{max-width:1280px;margin:0 auto;padding:80px 40px}
+.mission-text{max-width:760px;font-family:var(--font-display);font-size:clamp(20px,2.5vw,28px);font-weight:300;line-height:1.6;color:var(--gray-dark);margin-bottom:60px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.review-card{padding:32px;border:1px solid var(--gray-light)}
+.review-quote{font-family:var(--font-display);font-size:17px;font-style:italic;line-height:1.75;color:var(--gray-dark);margin-bottom:20px}
+.review-author{display:flex;align-items:center;gap:12px}
+.review-avatar{width:44px;height:44px;border-radius:50%;background:var(--gray-light);overflow:hidden;flex-shrink:0}
+.review-avatar img{width:100%;height:100%;object-fit:cover}
+.review-name{font-size:14px;font-weight:600;letter-spacing:.5px}
+.review-product{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--gray-light)}
+.review-prod-img{width:40px;height:48px;background:var(--off-white);flex-shrink:0;overflow:hidden}
+.review-prod-img img{width:100%;height:100%;object-fit:cover}
+.review-prod-name{font-size:13px;color:var(--gray-mid)}
+.review-prod-price{font-size:14px;font-weight:600}
+
+/* ── BLOG ── */
+.blog-section{background:var(--off-white)}
+.blog-header{max-width:1280px;margin:0 auto;padding:60px 40px 0;display:flex;align-items:flex-end;justify-content:space-between}
+.blog-grid{max-width:1280px;margin:0 auto;padding:32px 40px 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-card{background:var(--white);overflow:hidden}
+.blog-img{aspect-ratio:16/10;background:var(--gray-light);overflow:hidden;width:100%;height:220px}
+.blog-img img{width:100%;height:100%;object-fit:cover}
+.blog-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.blog-card:hover .blog-img img{transform:scale(1.04)}
+.blog-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#2a2a2a;color:#666;font-size:12px;text-transform:uppercase;letter-spacing:1px}
+.blog-body{padding:24px}
+.blog-category{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:500}
+.blog-title{font-family:var(--font-display);font-size:19px;font-weight:400;line-height:1.4;margin-bottom:10px}
+.blog-excerpt{font-size:14px;color:var(--gray-mid);line-height:1.65}
+.btn-blog{display:inline-block;background:var(--black);color:var(--white);padding:14px 32px;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:500}
+
+/* ── FAQ ── */
+.faq-section{max-width:800px;margin:0 auto;padding:80px 40px}
+.faq-title{font-family:var(--font-display);font-size:clamp(36px,5vw,60px);font-weight:300;text-align:center;margin-bottom:10px}
+.faq-subtitle{text-align:center;font-size:14px;color:var(--gray-mid);letter-spacing:0.5px;margin-bottom:48px}
+.faq-item{border-bottom:1px solid var(--gray-light);padding:22px 0;cursor:pointer}
+.faq-question{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:500;letter-spacing:.2px}
+.faq-toggle{width:30px;height:30px;border-radius:50%;border:1px solid var(--gray-light);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gray-mid);flex-shrink:0;transition:transform .2s}
+.faq-item.open .faq-toggle{transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:14px;color:var(--gray-dark);line-height:1.75}
+.faq-item.open .faq-answer{max-height:200px;padding-top:14px}
+
+/* ── FOOTER ── */
+footer{background:var(--white);border-top:1px solid var(--gray-light)}
+.footer-main{max-width:1280px;margin:0 auto;padding:60px 40px 40px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px}
+.footer-col h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:20px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul li a{font-size:14px;color:var(--gray-dark);text-decoration:none}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-bottom{max-width:1280px;margin:0 auto;padding:20px 40px;border-top:1px solid var(--gray-light);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-logo-sm{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:4px}
+.payment-icons{display:flex;gap:8px}
+.pay-icon{height:24px;background:var(--gray-light);border-radius:3px;padding:0 10px;font-size:10px;display:flex;align-items:center;font-weight:600;letter-spacing:.5px;color:var(--gray-dark)}
+.footer-social{display:flex;gap:16px}
+.footer-social a{color:var(--gray-dark);font-size:16px;text-decoration:none;font-weight:500}
+.footer-newsletter{border-top:1px solid var(--gray-light);max-width:1280px;margin:0 auto;padding:24px 40px;display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.footer-newsletter span{font-size:13px;color:var(--gray-mid);letter-spacing:.5px}
+.newsletter-form{display:flex;border:1px solid var(--gray-light)}
+.newsletter-form input{border:none;outline:none;padding:12px 18px;font-family:var(--font-body);font-size:14px;background:transparent;min-width:220px}
+.newsletter-form button{background:var(--black);color:var(--white);border:none;padding:12px 24px;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:var(--font-body);font-weight:500}
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float{position:fixed;right:20px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:200}
+.wa-btn{background:#25d366;color:#fff;width:52px;height:52px;border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:24px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+
+/* ── IMG PLACEHOLDER UTIL ── */
+.img-ph{background:var(--gray-light);display:flex;align-items:center;justify-content:center;color:var(--gray-mid);font-size:11px;text-transform:uppercase;letter-spacing:1px;text-align:center;padding:8px}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">What does your skincare do for the modern age?</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Shop</a></li>
+      <li><a href="#">Start My Skincare</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="nav-logo">
+      <img src="logomain.png" alt="Impala" style="height:80px;width:auto;display:block">
+    </div>
+    <div class="nav-right">
+      <select class="lang-select"><option>🌐 EN ▾</option></select>
+      <button>⊙</button>
+      <button>♡</button>
+      <button>☰</button>
+      <button>🛒 0</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="hero.jpg" alt="Hero" class="hero-bg">
+  <div class="hero-content">
+    <img src="logo.png" alt="Impala" style="height:50px;margin-bottom:20px;display:block">
+    <h1 class="hero-title">Meticulously<br><em>Mastered.</em></h1>
+    <div style="margin-top:8px;margin-bottom:36px;font-size:22px;font-weight:300;opacity:.6;letter-spacing:6px">IMPALA</div>
+    <a href="#" class="btn-primary">Shop Now</a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<div class="section">
+  <div class="section-label">Featured Products</div>
+  <p style="font-family:var(--font-display);font-size:clamp(26px,3vw,42px);font-weight:300;margin-bottom:48px">Redefining Luxury Skincare <em>for the Modern Man</em></p>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img src="beard.jpg" alt="Beard Serum" style="width:100%;height:100%;object-fit:cover">
+        <div class="badge-award">Award Winner</div>
+        <button class="add-btn">+</button>
+      </div>
+      <div class="product-tag">Impala</div>
+      <div class="product-name">Beard Serum</div>
+      <div class="stars">★★★★★</div>
+      <div class="product-price">$49.95</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img src="moist.jpg" alt="Face Moisturiser" style="width:100%;height:100%;object-fit:cover">
+        <div class="badge-award">Award Winner</div>
+        <button class="add-btn">+</button>
+      </div>
+      <div class="product-tag">Impala</div>
+      <div class="product-name">Face Moisturiser</div>
+      <div class="stars">★★★★★</div>
+      <div class="product-price">$69.95</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img src="shampoo.jpg" alt="Hair Shampoo" style="width:100%;height:100%;object-fit:cover">
+        <div class="badge-award">Award Winner</div>
+        <button class="add-btn">+</button>
+      </div>
+      <div class="product-tag">Impala</div>
+      <div class="product-name">Hair Shampoo</div>
+      <div class="stars">★★★★★</div>
+      <div class="product-price">$74.95</div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <img src="wax.jpg" alt="Hair Wax" style="width:100%;height:100%;object-fit:cover">
+        <button class="add-btn">+</button>
+      </div>
+      <div class="product-tag">Impala</div>
+      <div class="product-name">Hair Wax</div>
+      <div class="stars">★★★★★</div>
+      <div class="product-price">$59.95</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FULL WIDTH IMAGE -->
+<section style="width:100%;height:600px;overflow:hidden">
+  <img src="slide.png" alt="Impala" style="width:100%;height:100%;object-fit:cover">
+</section>
+
+<!-- PILLARS -->
+<div class="section">
+  <div class="section-label">Our Promise</div>
+  <p style="font-family:var(--font-display);font-size:clamp(24px,3vw,40px);font-weight:300;margin-bottom:40px">IMPALA pillars of <em>excellence</em></p>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-num">1</div>
+      <div class="pillar-title">Quality Ingredients</div>
+      <p class="pillar-body">Purely. Performance. Precision. We source only the finest active ingredients, combining scientific innovation with the power of nature for transformative results.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-num">2</div>
+      <div class="pillar-title">Tailored Solutions for the Modern Man</div>
+      <p class="pillar-body">Every product is designed specifically for men's skin biology — addressing unique concerns from shaving stress to environmental damage with targeted efficacy.</p>
+    </div>
+    <div class="pillar-card dark">
+      <div class="pillar-num">3</div>
+      <div class="pillar-title">Building Confidence Through Knowledge</div>
+      <p class="pillar-body">Empowerment Starts with Education. We believe that educated men make better skincare choices. Our platform provides tools to understand and master your routine.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-num">4</div>
+      <div class="pillar-title">Innovation &amp; Performance</div>
+      <p class="pillar-body">Cutting-edge formulations driven by research, delivering measurable results. We never stop pushing the boundaries of what men's skincare can achieve.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION + REVIEWS -->
+<section class="mission-section">
+  <div class="mission-inner">
+    <div class="section-label">Our Mission</div>
+    <p class="mission-text">At Impala, our customers are the essence of our mission. Their transformative journeys not only inspire us but also weave a narrative of confidence and self-care that reflects the power of our products.</p>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p class="review-quote">"After incorporating it into my daily routine, I noticed an immediate difference. My skin felt calmer and more refreshed after each wash, and over time, it remained smooth and clear."</p>
+        <div class="review-author">
+          <div class="review-avatar img-ph"><!-- <img src="reviewer1.jpg"> --></div>
+          <div>
+            <div class="review-name">James M.</div>
+            <div class="stars" style="font-size:13px">★★★★★</div>
+          </div>
+        </div>
+        <div class="review-product">
+          <div class="review-prod-img img-ph"><!-- <img src="product-thumb.jpg"> --></div>
+          <div>
+            <div class="review-prod-name">Beard Serum</div>
+            <div class="review-prod-price">$49.95</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"The beard serum has genuinely transformed my grooming routine. It softens my beard, reduces irritation, and keeps the skin underneath healthy. I won't go back to anything else."</p>
+        <div class="review-author">
+          <div class="review-avatar img-ph"><!-- <img src="reviewer2.jpg"> --></div>
+          <div>
+            <div class="review-name">Marcus T.</div>
+            <div class="stars" style="font-size:13px">★★★★★</div>
+          </div>
+        </div>
+        <div class="review-product">
+          <div class="review-prod-img img-ph"><!-- <img src="product-thumb.jpg"> --></div>
+          <div>
+            <div class="review-prod-name">Beard Serum</div>
+            <div class="review-prod-price">$54.95</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"I've been using the face moisturiser for a few weeks, and I'm really impressed. The lightweight, non-greasy formula absorbs quickly, leaving my skin feeling soft, hydrated, and smooth."</p>
+        <div class="review-author">
+          <div class="review-avatar img-ph"><!-- <img src="reviewer3.jpg"> --></div>
+          <div>
+            <div class="review-name">David R.</div>
+            <div class="stars" style="font-size:13px">★★★★★</div>
+          </div>
+        </div>
+        <div class="review-product">
+          <div class="review-prod-img img-ph"><!-- <img src="product-thumb.jpg"> --></div>
+          <div>
+            <div class="review-prod-name">Face Moisturiser</div>
+            <div class="review-prod-price">$69.95</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog-section">
+  <div class="blog-header">
+    <div>
+      <div class="section-label">Journal</div>
+      <p style="font-family:var(--font-display);font-size:clamp(24px,3vw,40px);font-weight:300">Dive into the world of men's skincare with our expertly curated blog</p>
+    </div>
+    <a href="#" class="btn-blog">Read All Articles</a>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="blog-img">
+        <img src="blog-1.webp" alt="Blog 1">
+      </div>
+      <div class="blog-body">
+        <div class="blog-category">Beard Care</div>
+        <h3 class="blog-title">The Art of Beard Care: How to Use Beard Serum for Maximum Results</h3>
+        <p class="blog-excerpt">A step-by-step guide to applying beard serum correctly — and why consistency is the key to a softer, healthier beard.</p>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img">
+        <img src="blog-2.webp" alt="Blog 2">
+      </div>
+      <div class="blog-body">
+        <div class="blog-category">Hair Care</div>
+        <h3 class="blog-title">Why Your Hair Deserves Better: The Science Behind Premium Hair Shampoo</h3>
+        <p class="blog-excerpt">Not all shampoos are created equal. Discover what separates a high-performance formula from the rest.</p>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img">
+        <img src="blog-3.webp" alt="Blog 3">
+      </div>
+      <div class="blog-body">
+        <div class="blog-category">Skin Health</div>
+        <h3 class="blog-title">Moisturised, Not Greasy: The Modern Man's Guide to Face Moisturiser</h3>
+        <p class="blog-excerpt">Everything you need to know about finding the right moisturiser for your skin type — and how to make it part of your daily routine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="faq-section">
+    <div class="section-label" style="text-align:center">Support</div>
+    <h2 class="faq-title">FAQ</h2>
+    <p class="faq-subtitle">Discover the Essential Everything You Need to Know About Impala</p>
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-question">
+        <span>1. What distinguishes Impala from other men's skincare brands?</span>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">Impala products are formulated exclusively for men's skin physiology. Our award-winning products combine clinically-proven active ingredients with a refined, minimalist approach to daily grooming — delivering measurable results without complexity.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-question">
+        <span>2. Are Impala products suitable for all skin types?</span>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">Yes. Our range is developed to address diverse skin concerns including oily, dry, combination, and sensitive skin types. Each product description includes a skin-type guide to help you find your ideal match.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-question">
+        <span>3. What key ingredients can I find in Impala products?</span>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">Our formulations feature Retinol, Hyaluronic Acid, Niacinamide, Peptide complexes, and plant-derived actives, all sourced from premium suppliers and used at clinically effective concentrations.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-question">
+        <span>4. Are Impala products cruelty-free and environmentally conscious?</span>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">Impala is 100% cruelty-free. We use recyclable packaging, responsibly sourced ingredients, and continuously work to reduce our environmental footprint across the supply chain.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-question">
+        <span>5. How can I incorporate Impala into my daily routine?</span>
+        <div class="faq-toggle">+</div>
+      </div>
+      <div class="faq-answer">A simple morning and evening routine is all you need. Start with our Beard Serum, apply your targeted treatment, and finish with our Face Moisturiser. Use our "Start My Skincare" quiz for a personalised recommendation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-col">
+      <h4>Main</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Start My Skincare</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="#">Beard Serum</a></li>
+        <li><a href="#">Face Moisturiser</a></li>
+        <li><a href="#">Hair Shampoo</a></li>
+        <li><a href="#">Hair Wax</a></li>
+        <li><a href="#">View All Products</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Blog</h4>
+      <ul>
+        <li><a href="#">Impala Moments</a></li>
+        <li><a href="#">Skin Health</a></li>
+        <li><a href="#">Grooming Tips</a></li>
+        <li><a href="#">Ingredients Guide</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-newsletter">
+    <span>Subscribe to our newsletter and get 15% off</span>
+    <div class="newsletter-form">
+      <input type="email" placeholder="E-mail">
+      <button>Subscribe</button>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <img src="logomain.png" alt="Impala" style="height:50px;width:auto">
+    <div class="payment-icons">
+      <span class="pay-icon">VISA</span>
+      <span class="pay-icon">MC</span>
+      <span class="pay-icon">AMEX</span>
+      <span class="pay-icon">PAYPAL</span>
+      <span class="pay-icon">APPLE PAY</span>
+      <span class="pay-icon">GOOGLE PAY</span>
+    </div>
+    <div class="footer-social">
+      <a href="#">ig</a>
+      <a href="#">fb</a>
+      <a href="#">tw</a>
+      <a href="#">yt</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<div class="wa-float">
+  <a href="https://wa.me/" class="wa-btn" title="Chat with us on WhatsApp">💬</a>
+</div>
+
+</body>
+</html>
